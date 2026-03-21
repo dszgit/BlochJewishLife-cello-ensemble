@@ -321,7 +321,7 @@ common-title = \markup {
   \bookpart {
     \paper {
       ragged-bottom = ##f
-      ragged-last-bottom = ##f
+      ragged-last-bottom = ##t
       min-systems-per-page = #4
       % top-margin = #15
       % bottom-margin = #15
@@ -348,12 +348,14 @@ common-title = \markup {
 	}
 	<<
 	  \new Staff \with {
-	    fontSize = #-7
-	    \override StaffSymbol.staff-space = #(magstep -4)
+	    fontSize = #-5
+	    \override StaffSymbol.staff-space = #(magstep -5)
+	    \override StaffSymbol.color = #(x11-color 'SlateBlue)
 	  } { \partCombine \prayer_accompA_notes_only \prayer_accompB_notes_only } 
 	  \new Staff \with {
-	    fontSize = #-7
-	    \override StaffSymbol.staff-space = #(magstep -4)
+	    fontSize = #-5
+	    \override StaffSymbol.staff-space = #(magstep -5)
+	    \override StaffSymbol.color = #(x11-color 'SeaGreen)
 	  } { \partCombine \prayer_accompC_notes_only \prayer_accompD_notes_only } 
 	>>
       >>
@@ -379,12 +381,14 @@ common-title = \markup {
 	}
 	<<
 	  \new Staff \with {
-	    fontSize = #-7
-	    \override StaffSymbol.staff-space = #(magstep -4)
+	    fontSize = #-5
+	    \override StaffSymbol.staff-space = #(magstep -5)
+	    \override StaffSymbol.color = #(x11-color 'SlateBlue)
 	  } { \partCombine \supplication_accompA_notes_only \supplication_accompB_notes_only } 
 	  \new Staff \with {
-	    fontSize = #-7
-	    \override StaffSymbol.staff-space = #(magstep -4)
+	    fontSize = #-5
+	    \override StaffSymbol.staff-space = #(magstep -5)
+	    \override StaffSymbol.color = #(x11-color 'SeaGreen)
 	  } { \partCombine \supplication_accompC_notes_only \supplication_accompD_notes_only } 
 	>>
       >>
@@ -410,16 +414,19 @@ common-title = \markup {
 	}
 	<<
 	  \new Staff \with {
-	    fontSize = #-7
-	    \override StaffSymbol.staff-space = #(magstep -4)
+	    fontSize = #-2
+	    \override StaffSymbol.staff-space = #(magstep -2)
+	    \override StaffSymbol.color = #(x11-color 'SlateBlue)
 	  } { \partCombine \song_accompA_notes_only \song_accompB_notes_only } 
 	  \new Staff \with {
-	    fontSize = #-7
-	    \override StaffSymbol.staff-space = #(magstep -4)
+	    fontSize = #-2
+	    \override StaffSymbol.staff-space = #(magstep -2)
+	    \override StaffSymbol.color = #(x11-color 'SeaGreen)
 	  } { \partCombine \song_accompC_notes_only \song_accompD_notes_only } 
 	>>
       >>
       \layout {
+	ragged-last-bottom = ##t
 	\context {
 	  \Score
 	  \override SpacingSpanner.common-shortest-duration = #(ly:make-moment 1/8)
