@@ -61,7 +61,8 @@ prayer_solo = \compressMMRests \relative c' {
   c8\<_\markup{\italic "meno" \dynamic "p"} c c'4~(\! | % bar# 35
   c16 df_\markup{\italic "cresc."} e f) \tuplet 3/2 { g8( af bf) } | % bar# 36
   b8--\< c-- df4~\! | % bar# 37
-  { df8.\fermata^\markup{"breve"} r16^\markup{\italic "(8va ad lib.)"}
+  % { df8.\fermata^\markup{"breve"} r16^\markup{\hspace #5 \italic "(8va ad lib.)"}
+  { df8.\fermata r16
     \clef "tenor" c8--\f c--
   } | % bar# 38
   \tempo "Poco più vivo"
@@ -69,10 +70,11 @@ prayer_solo = \compressMMRests \relative c' {
   \grace{e16( f} \tuplet 3/2 { e4)\> df c\! } | % bar# 40
   \tuplet 3/2 { f4--\f e-- df-- } | % bar# 41
   { \grace{c16( df}
-    \tuplet 3/2 { c4)\> ^\markup{\raise #2 \italic "rall. molto"} bf af\! }
+    \tuplet 3/2 { c4)\> ^\markup{\hspace #-2 \italic "rall. molto"} bf af\! }
   } | % bar# 42
   \clef "bass"
-  \tuplet 3/2 { df4--^\markup{\italic "(loco)"}\mf c--\> bf-- } | % bar# 43
+  % \tuplet 3/2 { df4--^\markup{\italic "(loco)"}\mf c--\> bf-- } | % bar# 43
+  \tuplet 3/2 { df4--\mf c--\> bf-- } | % bar# 43
   \tuplet 3/2 { af4-- g-.--( f-.--)\~ } | % bar# 44
   \betterStringNumbers
   \once\override DynamicText.X-offset = #-2

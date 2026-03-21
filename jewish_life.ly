@@ -23,6 +23,19 @@
 \include "ILY/song-C.ily"
 \include "ILY/song-D.ily"
 
+\include "ILY/prayer-A-notes-only.ily"
+\include "ILY/prayer-B-notes-only.ily"
+\include "ILY/prayer-C-notes-only.ily"
+\include "ILY/prayer-D-notes-only.ily"
+\include "ILY/supplication-A-notes-only.ily"
+\include "ILY/supplication-B-notes-only.ily"
+\include "ILY/supplication-C-notes-only.ily"
+\include "ILY/supplication-D-notes-only.ily"
+\include "ILY/song-A-notes-only.ily"
+\include "ILY/song-B-notes-only.ily"
+\include "ILY/song-C-notes-only.ily"
+\include "ILY/song-D-notes-only.ily"
+
 lilypond-tagline = \markup {
   \pad-to-box #'(0 . 0) #'(0 . 3)
   {  \with-url
@@ -293,6 +306,130 @@ common-title = \markup {
     }
   }
 }
+
+\book {			      % Solo with two accompaniment cue staves
+  \paper {
+    output-suffix = "solo-score"
+  }
+  \bookpart {
+    \header {
+      copyright = \common-copyright
+    }
+    \common-title
+    \markup{\fill-line{\line{\hspace #6 \center-column { \vspace #5 \fontsize #3 "CELLO SOLO" } } } }
+  }
+  \bookpart {
+    \paper {
+      ragged-bottom = ##f
+      ragged-last-bottom = ##f
+      min-systems-per-page = #4
+      % top-margin = #15
+      % bottom-margin = #15
+    }
+    \header {
+      composer = "Ernest Bloch"
+      dedication = "To Hans Kindler"
+      title = \markup{ \vspace #2 "From Jewish Life" }
+      arranger = "arr. D.S. Zelinsky"
+      tagline = \common-tagline
+      instrument = "Cello Solo"
+    }
+    \score {
+      \header {
+	piece = \markup{ \fill-line { \fontsize #2 \bold "Prayer" } }
+      }
+      \new StaffGroup  \with {
+      }
+      <<
+	\new Staff { \prayer_solo }
+	\new StaffGroup \with {
+	  \override StaffGrouper.staff-staff-spacing = #'((basic-distance . 0) (minimum-distance . 0) (padding . 0) (stretchability . 0))
+	  printPartCombineTexts = ##f
+	}
+	<<
+	  \new Staff \with {
+	    fontSize = #-7
+	    \override StaffSymbol.staff-space = #(magstep -4)
+	  } { \partCombine \prayer_accompA_notes_only \prayer_accompB_notes_only } 
+	  \new Staff \with {
+	    fontSize = #-7
+	    \override StaffSymbol.staff-space = #(magstep -4)
+	  } { \partCombine \prayer_accompC_notes_only \prayer_accompD_notes_only } 
+	>>
+      >>
+      \layout {
+	\context {
+	  \Score
+	  \override SpacingSpanner.common-shortest-duration = #(ly:make-moment 1/4)
+	}
+      }
+    }
+    \pageBreak
+    \score {
+      \header {
+	piece = \markup{ \fill-line { \fontsize #2 \bold "Supplication" } }
+      }
+      \new StaffGroup  \with {
+      }
+      <<
+	\new Staff { \supplication_solo }
+	\new StaffGroup \with {
+	  \override StaffGrouper.staff-staff-spacing = #'((basic-distance . 0) (minimum-distance . 0) (padding . 0) (stretchability . 0))
+	  printPartCombineTexts = ##f
+	}
+	<<
+	  \new Staff \with {
+	    fontSize = #-7
+	    \override StaffSymbol.staff-space = #(magstep -4)
+	  } { \partCombine \supplication_accompA_notes_only \supplication_accompB_notes_only } 
+	  \new Staff \with {
+	    fontSize = #-7
+	    \override StaffSymbol.staff-space = #(magstep -4)
+	  } { \partCombine \supplication_accompC_notes_only \supplication_accompD_notes_only } 
+	>>
+      >>
+      \layout {
+	\context {
+	  \Score
+	  \override SpacingSpanner.common-shortest-duration = #(ly:make-moment 1/4)
+	}
+      }
+    }
+    \pageBreak
+    \score {
+      \header {
+	piece = \markup{ \fill-line { \fontsize #2 \bold "Song" } }
+      }
+      \new StaffGroup  \with {
+      }
+      <<
+	\new Staff { \song_solo }
+	\new StaffGroup \with {
+	  \override StaffGrouper.staff-staff-spacing = #'((basic-distance . -10))
+	  printPartCombineTexts = ##f
+	}
+	<<
+	  \new Staff \with {
+	    fontSize = #-7
+	    \override StaffSymbol.staff-space = #(magstep -4)
+	  } { \partCombine \song_accompA_notes_only \song_accompB_notes_only } 
+	  \new Staff \with {
+	    fontSize = #-7
+	    \override StaffSymbol.staff-space = #(magstep -4)
+	  } { \partCombine \song_accompC_notes_only \song_accompD_notes_only } 
+	>>
+      >>
+      \layout {
+	\context {
+	  \Score
+	  \override SpacingSpanner.common-shortest-duration = #(ly:make-moment 1/8)
+	}
+      }
+    }
+  }
+}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%  Cello A  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
