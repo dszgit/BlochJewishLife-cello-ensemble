@@ -23,30 +23,13 @@
 \include "ILY/song-C.ily"
 \include "ILY/song-D.ily"
 
-lilypond-tagline = \markup {
-  \pad-to-box #'(0 . 0) #'(0 . 3)
-  {  \with-url
-    "https://lilypond.org/"
-    \line {
-      #(format #f "Music engraving by LilyPond ~a~awww.lilypond.org"
-         (lilypond-version)
-         (ly:wide-char->utf-8 #x2014)
-      )				% x2014 = em-dash.
-    }
-  }
-}
-
-common-tagline = \lilypond-tagline
-%% common-tagline = ##f
 common-tagline = \markup {
   \pad-to-box #'(0 . 0) #'(0 . 3)
   {  \with-url
     "https://lilypond.org/"
     \line {
       #(format #f "Music engraving by D.S.Z. with LilyPond ~a~awww.lilypond.org"
-         (lilypond-version)
-         (ly:wide-char->utf-8 #x2014)
-      )				% x2014 = em-dash.
+         (lilypond-version) (ly:wide-char->utf-8 #x2014) ) % x2014 = em-dash.
     }
   }
 }
@@ -81,7 +64,28 @@ common-title = \markup {
   }
 }
 
+arrangers-note = \markup {
+  \vspace #20
+  \fill-line {
+    \override #'(line-width . 95)
+    \justify {
+      \fontsize #2 {
 
+	{\bold "ARRANGER'S NOTE: "} {\italic "From Jewish Life"} was
+	originally for solo cello with piano accompaniment.  It was
+	written in 1924 for cellist Hans Kindler, who had premiered
+	Bloch's {\italic "Schelomo"} and was later the founder and
+	conductor of the National Symphony Orchestra.  This
+	arrangement uses the original solo part, and simply divides
+	the piano accompaniment among the four other cello parts.  The
+	only significant change is that {\italic "Supplication"} is
+	transposed down a whole step in order to make the high-octave
+	alternating fifths in the accompaniment playable as harmonics.
+
+      }
+    }
+  }
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  Score  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -94,6 +98,8 @@ common-title = \markup {
       copyright = \common-copyright
     }
     \common-title
+    \pageBreak
+    \arrangers-note
   }
   \bookpart {
     \paper {
@@ -326,60 +332,29 @@ common-title = \markup {
       \header {
 	piece = \markup{ \fill-line { \fontsize #2 \bold "Prayer" } }
       }
-      \new StaffGroup <<
-	\new Staff \with {
-	  fontSize = #-6
-	  \override StaffSymbol.staff-space = #(magstep -6)
-	  instrumentName = \markup{\fontsize #6 "Solo"}
-	} { \prayer_solo  }
-	\new Staff \with {instrumentName = "Cello A"}{
-	  \prayer_accompA
-	}
-      >>
-      \layout {
-	\context {
-	  \Score
-	  \override SpacingSpanner.common-shortest-duration = #(ly:make-moment 1/8)
-	}
+      \new Staff \with {instrumentName = "Cello A"}{
+	\prayer_accompA
       }
+      \layout {}
     }
     \pageBreak
     \score {
       \header {
 	piece = \markup{ \fill-line { \fontsize #2 \bold "Supplication" } }
       }
-      \new StaffGroup <<
-	\new Staff \with {
-	  fontSize = #-6
-	  \override StaffSymbol.staff-space = #(magstep -6)
-	  instrumentName = \markup{\fontsize #6 "Solo"}
-	} { \supplication_solo  }
-	\new Staff \with {instrumentName = "Cello A"}{
-	  \supplication_accompA
-	}
-      >>
-      \layout {
-	\context {
-	  \Score
-	  \override SpacingSpanner.common-shortest-duration = #(ly:make-moment 1/16)
-	}
+      \new Staff \with {instrumentName = "Cello A"}{
+	\supplication_accompA
       }
+      \layout {}
     }
     \pageBreak
     \score {
       \header {
 	piece = \markup{ \fill-line { \fontsize #2 \bold "Song" } }
       }
-      \new StaffGroup <<
-	\new Staff \with {
-	  fontSize = #-6
-	  \override StaffSymbol.staff-space = #(magstep -6)
-	  instrumentName = \markup{\fontsize #6 "Solo"}
-	} { \song_solo  }
-	\new Staff \with {instrumentName = "Cello A"} {
-	  \song_accompA
-	}
-      >>
+      \new Staff \with {instrumentName = "Cello A"} {
+	\song_accompA
+      }
       \layout {}
     }
   }
@@ -418,16 +393,9 @@ common-title = \markup {
       \header {
 	piece = \markup{ \fill-line { \fontsize #2 \bold "Prayer" } }
       }
-      \new StaffGroup <<
-	\new Staff \with {
-	  fontSize = #-6
-	  \override StaffSymbol.staff-space = #(magstep -6)
-	  instrumentName = \markup{\fontsize #6 "Solo"}
-	} { \prayer_solo  }
-	\new Staff \with {instrumentName = "Cello B"}{
-	  \prayer_accompB
-	}
-      >>
+      \new Staff \with {instrumentName = "Cello B"}{
+	\prayer_accompB
+      }
       \layout {}
     }
     \pageBreak
@@ -435,38 +403,19 @@ common-title = \markup {
       \header {
 	piece = \markup{ \fill-line { \fontsize #2 \bold "Supplication" } }
       }
-      \new StaffGroup <<
-	\new Staff \with {
-	  fontSize = #-6
-	  \override StaffSymbol.staff-space = #(magstep -6)
-	  instrumentName = \markup{\fontsize #6 "Solo"}
-	} { \supplication_solo  }
-	\new Staff \with {instrumentName = "Cello B"} {
-	  \supplication_accompB
-	}
-      >>
-      \layout {
-	\context {
-	  \Score
-	  \override SpacingSpanner.common-shortest-duration = #(ly:make-moment 1/16)
-	}
+      \new Staff \with {instrumentName = "Cello B"} {
+	\supplication_accompB
       }
+      \layout {}
     }
     \pageBreak
     \score {
       \header {
 	piece = \markup{ \fill-line { \fontsize #2 \bold "Song" } }
       }
-      \new StaffGroup <<
-	\new Staff \with {
-	  fontSize = #-6
-	  \override StaffSymbol.staff-space = #(magstep -6)
-	  instrumentName = \markup{\fontsize #6 "Solo"}
-	} { \song_solo  }
-	\new Staff \with {instrumentName = "Cello B"} {
-	  \song_accompB
-	}
-      >>
+      \new Staff \with {instrumentName = "Cello B"} {
+	\song_accompB
+      }
       \layout {}
     }
   }
@@ -506,16 +455,9 @@ common-title = \markup {
       \header {
 	piece = \markup{ \fill-line { \fontsize #2 \bold "Prayer" } }
       }
-      \new StaffGroup <<
-	\new Staff \with {
-	  fontSize = #-6
-	  \override StaffSymbol.staff-space = #(magstep -6)
-	  instrumentName = \markup{\fontsize #6 "Solo"}
-	} { \prayer_solo  }
-	\new Staff \with {instrumentName = "Cello C"} {
-	  \prayer_accompC
-	}
-      >>
+      \new Staff \with {instrumentName = "Cello C"} {
+	\prayer_accompC
+      }
       \layout {}
     }
     \pageBreak
@@ -523,38 +465,19 @@ common-title = \markup {
       \header {
 	piece = \markup{ \fill-line { \fontsize #2 \bold "Supplication" } }
       }
-      \new StaffGroup <<
-	\new Staff \with {
-	  fontSize = #-6
-	  \override StaffSymbol.staff-space = #(magstep -6)
-	  instrumentName = \markup{\fontsize #6 "Solo"}
-	} { \supplication_solo  }
-	\new Staff \with {instrumentName = "Cello C"} {
-	  \supplication_accompC
-	}
-      >>
-      \layout {
-	\context {
-	  \Score
-	  \override SpacingSpanner.common-shortest-duration = #(ly:make-moment 1/16)
-	}
+      \new Staff \with {instrumentName = "Cello C"} {
+	\supplication_accompC
       }
+      \layout {}
     }
     \pageBreak
     \score {
       \header {
 	piece = \markup{ \fill-line { \fontsize #2 \bold "Song" } }
       }
-      \new StaffGroup <<
-	\new Staff \with {
-	  fontSize = #-6
-	  \override StaffSymbol.staff-space = #(magstep -6)
-	  instrumentName = \markup{\fontsize #6 "Solo"}
-	} { \song_solo  }
-	\new Staff \with {instrumentName = "Cello C"} {
-	  \song_accompC
-	}
-      >>
+      \new Staff \with {instrumentName = "Cello C"} {
+	\song_accompC
+      }
       \layout {}
     }
   }
@@ -594,16 +517,9 @@ common-title = \markup {
       \header {
 	piece = \markup{ \fill-line { \fontsize #2 \bold "Prayer" } }
       }
-      \new StaffGroup <<
-	\new Staff \with {
-	  fontSize = #-6
-	  \override StaffSymbol.staff-space = #(magstep -6)
-	  instrumentName = \markup{\fontsize #6 "Solo"}
-	} { \prayer_solo  }
-	\new Staff \with {instrumentName = "Cello D"} {
-	  \prayer_accompD
-	}
-      >>
+      \new Staff \with {instrumentName = "Cello D"} {
+	\prayer_accompD
+      }
       \layout {}
     }
     \pageBreak
@@ -611,174 +527,23 @@ common-title = \markup {
       \header {
 	piece = \markup{ \fill-line { \fontsize #2 \bold "Supplication" } }
       }
-      \new StaffGroup <<
-	\new Staff \with {
-	  fontSize = #-6
-	  \override StaffSymbol.staff-space = #(magstep -6)
-	  instrumentName = \markup{\fontsize #6 "Solo"}
-	} { \supplication_solo  }
-	\new Staff \with {instrumentName = "Cello D"} {
-	  \supplication_accompD
-	}
-      >>
-      \layout {
-	\context {
-	  \Score
-	  \override SpacingSpanner.common-shortest-duration = #(ly:make-moment 1/16)
-	}
+      \new Staff \with {instrumentName = "Cello D"} {
+	\supplication_accompD
       }
+      \layout {}
     }
     \pageBreak
     \score {
       \header {
 	piece = \markup{ \fill-line { \fontsize #2 \bold "Song" } }
       }
-      \new StaffGroup <<
-	\new Staff \with {
-	  fontSize = #-6
-	  \override StaffSymbol.staff-space = #(magstep -6)
-	  instrumentName = \markup{\fontsize #6 "Solo"}
-	} { \song_solo  }
-	\new Staff \with {instrumentName = "Cello D"} {
-	  \song_accompD
-	}
-      >>
+      \new Staff \with {instrumentName = "Cello D"} {
+	\song_accompD
+      }
       \layout {}
     }
   }
 }
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  MIDI  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  Score  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\book {
-  \paper { output-suffix = "prayer" }
-  \score {
-    <<
-      \new Staff { \set Staff.midiMaximumVolume = #2.0 \prayer_solo }
-      \\ \prayer_accompA \\ \prayer_accompB \\ \prayer_accompC \\ \prayer_accompD
-    >>
-    \midi {}
-  }
-}
-
-\book {
-  \paper { output-suffix = "supplication" }
-  \score {
-    <<
-      \new Staff { \set Staff.midiMaximumVolume = #2.0 \supplication_solo }
-      \\ \supplication_accompA \\ \supplication_accompB \\ \supplication_accompC \\ \supplication_accompD
-    >>
-    \midi {}
-  }
-}
-
-\book {
-  \paper { output-suffix = "song" }
-  \score {
-    <<
-      \new Staff { \set Staff.midiMaximumVolume = #2.0 \song_solo }
-      \\ \song_accompA \\ \song_accompB \\ \song_accompC \\ \song_accompD
-    >>
-    \midi {}
-  }
-}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  Solo  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\book {
-  \paper { output-suffix = "prayer-solo" }
-  \score { \prayer_solo \midi {} }
-}
-
-\book {
-  \paper { output-suffix = "supplication-solo" }
-  \score { \supplication_solo \midi {} }
-}
-
-\book {
-  \paper { output-suffix = "song-solo" }
-  \score { \song_solo \midi {} }
-}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  Cello A  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\book {
-  \paper { output-suffix = "prayer-cello-A" }
-  \score { \prayer_accompA \midi {} }
-}
-
-\book {
-  \paper { output-suffix = "supplication-cello-A" }
-  \score { \supplication_accompA \midi {} }
-}
-
-\book {
-  \paper { output-suffix = "song-cello-A" }
-  \score { \song_accompA \midi {} }
-}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  Cello B  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\book {
-  \paper { output-suffix = "prayer-cello-B" }
-  \score { \prayer_accompB \midi {} }
-}
-
-\book {
-  \paper { output-suffix = "supplication-cello-B" }
-  \score { \supplication_accompB \midi {} }
-}
-
-\book {
-  \paper { output-suffix = "song-cello-B" }
-  \score { \song_accompB \midi {} }
-}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  Cello C  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\book {
-  \paper { output-suffix = "prayer-cello-C" }
-  \score { \prayer_accompC \midi {} }
-}
-
-\book {
-  \paper { output-suffix = "supplication-cello-C" }
-  \score { \supplication_accompC \midi {} }
-}
-
-\book {
-  \paper { output-suffix = "song-cello-C" }
-  \score { \song_accompC \midi {} }
-}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  Cello D  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\book {
-  \paper { output-suffix = "prayer-cello-D" }
-  \score { \prayer_accompD \midi {} }
-}
-
-\book {
-  \paper { output-suffix = "supplication-cello-D" }
-  \score { \supplication_accompD \midi {} }
-}
-
-\book {
-  \paper { output-suffix = "song-cello-D" }
-  \score { \song_accompD \midi {} }
-}
-
-
-
 
 
 
